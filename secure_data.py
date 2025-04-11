@@ -81,7 +81,7 @@ elif choice == "Register":
             if username in stored_data:
                 st.warning("⚠️ User Already Exists.")
             else:
-                stored_data(username) = {
+                stored_data[username] = {
                     "password":password,
                     "data":[]
                 }
