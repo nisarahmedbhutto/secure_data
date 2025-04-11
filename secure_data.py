@@ -74,21 +74,36 @@ if choice == "Home":
 elif choice == "Register":
     st.subheader("🖊️ Register New User")
     username = st.text_input("Choose User Name")
-    password = st.text_input("Choose Password ",type="password")
+    password = st.text_input("Choose Password ", type="password")
 
     if st.button("Register"):
-    if username and password:
-        if username in stored_data:
-            st.warning("⚠️ User Already Exists.")
+        if username and password:  # ✅ yeh ab sahi indentation me hai
+            if username in stored_data:
+                st.warning("⚠️ User Already Exists.")
+            else:
+                stored_data[username] = {
+                    "password": hash_password(password),
+                    "data": []
+                }
+                save_data(stored_data)
+                st.success("✅ User Registered Successfully")
         else:
-            stored_data[username] = {
-                "password": hash_password(password),  # <-- fix yahan hai
-                "data": []
-            }
-            save_data(stored_data)
-            st.success("✅ User Register Sucessfully")
-    else:
-        st.error("Both Fields Are Required")
+            st.error("Both Fields Are Required")
+🔁 Full Explanation:
+Problem: if username and password: wali line ka indentation missing tha.
+
+Fix: Usko 1 tab ya 4 spaces se indent kar diya, taake pata chale ke ye if st.button("Register"): ke andar hai.
+
+Agar chaho to main full code bhi fix karke de doon ek baar me — bolo toh?
+
+
+
+
+
+
+
+
+
 
 elif choice == "Login":
         st.subheader("🗝️ User Login")
